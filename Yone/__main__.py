@@ -11,14 +11,14 @@ from telegram.ext import (
     MessageHandler,
 )
 from telegram.utils.helpers import escape_markdown, mention_html
-from Yone.Handlers.validation import is_user_admin
+from Tenka.Handlers.validation import is_user_admin
 
 from telegram.error import (
     BadRequest,
     Unauthorized,
 )
 
-from Yone import (
+from Tenka import (
     OWNER_ID,
     OWNER_USERNAME,
     dispatcher, 
@@ -34,8 +34,8 @@ from Yone import (
     telethn,
     updater)
 
-from Yone.Plugins import ALL_MODULES
-from Yone.__help__ import (
+from Tenka.Plugins import ALL_MODULES
+from Tenka.__help__ import (
 get_help, 
 help_button, 
 get_settings, 
@@ -220,10 +220,10 @@ def start(update: Update, context: CallbackContext):
 
 
 
-def yone_about_callback(update: Update, context: CallbackContext):
+def tenka_about_callback(update: Update, context: CallbackContext):
     first_name = update.effective_user.first_name
     query = update.callback_query
-    if query.data == "yone_":
+    if query.data == "tenka_":
         query.message.edit_text(
             text="""Hello *{}*, My name is *{}*. A Powerful Telegram Group Management Bot built to help you manage Group easily.
             \n ‣ I can Restrict Users.
@@ -240,16 +240,16 @@ def yone_about_callback(update: Update, context: CallbackContext):
             reply_markup=InlineKeyboardMarkup(
                 [
                    [
-                     InlineKeyboardButton(text="Support", url="t.me/Yone_Support"),
-                     InlineKeyboardButton(text="News", url="t.me/Yone_Updates"),
+                     InlineKeyboardButton(text="Support", url="t.me/Tenka_Support"),
+                     InlineKeyboardButton(text="News", url="t.me/Tenka_Updates"),
                    ],
                    [
-                    InlineKeyboardButton(text="Back", callback_data="yone_back")
+                    InlineKeyboardButton(text="Back", callback_data="Tenka_back")
                    ]
                 ]
             ),
         )
-    elif query.data == "yone_back":
+    elif query.data == "Tenka_back":
         query.message.edit_text(
                 PM_START_TEXT.format(
                         escape_markdown(first_name), escape_markdown(context.bot.first_name)),
@@ -267,7 +267,7 @@ def yone_about_callback(update: Update, context: CallbackContext):
     [
         InlineKeyboardButton(text="Tools", callback_data="tools_back"),
         InlineKeyboardButton(
-            text="Bot Info", callback_data="yone_"
+            text="Bot Info", callback_data="Tenka_"
         ),
     ],
     [
@@ -301,7 +301,7 @@ def main():
     user_help_callback_handler = CallbackQueryHandler(user_help_button, pattern=r"user_.*", run_async=True)
     tools_help_callback_handler = CallbackQueryHandler(tools_help_button, pattern=r"tools_.*", run_async=True)
 
-    about_callback_handler = CallbackQueryHandler(yone_about_callback, pattern=r"yone_", run_async=True)
+    about_callback_handler = CallbackQueryHandler(Tenka_about_callback, pattern=r"yone_", run_async=True)
 
     settings_handler = CommandHandler("settings", get_settings, run_async=True)
     settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_", run_async=True)
